@@ -55,5 +55,7 @@ majority_contained_err = measurements["majority_contained_err"]
 outfile = os.path.join(basedir, 'studies/ContractNet/slurm/scan_point_cloud_construction.csv')
 print('writing to outfile', outfile)
 with open(outfile, 'a') as f:
-    f.write(f'{n_hits},{n_hits_err},{n_hits_ext},{n_hits_ratio},{n_hits_ratio_err},'
-            + f'{n_unique_pids_err},{majority_contained},{majority_contained_err}\n')
+    f.write(f'{n_sectors},{sector_di},{sector_ds},{pt_thld},' +
+            f'{n_hits},{n_hits_err},{n_hits_ext},{n_hits_ratio},{n_hits_ratio_err},' +
+            f'{n_unique_pids},{n_unique_pids_err},' +
+            f'{majority_contained},{majority_contained_err}\n')
