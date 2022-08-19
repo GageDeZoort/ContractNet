@@ -32,13 +32,15 @@ pc_builder = PointCloudBuilder(indir=os.path.join(basedir, 'events'),
                                write_output=False,
                                n_sectors=n_sectors,
                                sector_di=sector_di, 
-                               sector_ds=sector_ds, thld=p[3], 
+                               sector_ds=sector_ds, 
+                               thld=pt_thld,
                                pixel_only=True, measurement_mode=True,
                                remove_noise=False)
 pc_builder.process(n=25, verbose=True)
 
 # extract output measurements
 measurements = pc_builder.get_measurements()
+print(measurements)
 n_hits = measurements["n_hits"]
 n_hits_err = measurements["n_hits_err"]
 n_hits_ext = measurements["n_hits_ext_err"]
@@ -46,12 +48,12 @@ n_hits_ratio = measurements["n_hits_ratio"]
 n_hits_ratio_err = measurements["n_hits_ratio_err"]
 n_unique_pids = measurements["n_unique_pids"]
 n_unique_pids_err = measurements["n_unique_pids_err"]
-majority_contained = measurements["majority_contained_{str(pt_thld)}"]
-majority_contained_err = measurements["majority_contained_{str(pt_thld)}"]
+majority_contained = measurements["majority_contained"]
+majority_contained_err = measurements["majority_contained_err"]
 
 # write to output
 outfile = os.path.join(basedir, 'studies/ContractNet/slurm/scan_point_cloud_construction.csv')
+print('writing to outfile', outfile)
 with open(outfile, 'a') as f:
     f.write(f'{n_hits},{n_hits_err},{n_hits_ext},{n_hits_ratio},{n_hits_ratio_err},'
-            +'{n_unique_pids_err},{majority_contained},{majority_contained_err}')
-
+            + f'{n_unique_pids_err},{majority_contained},{majority_contained_err}\n')
