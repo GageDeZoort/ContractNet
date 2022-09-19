@@ -36,7 +36,7 @@ pc_builder = PointCloudBuilder(indir=os.path.join(basedir, 'events'),
                                thld=pt_thld,
                                pixel_only=True, measurement_mode=True,
                                remove_noise=False)
-pc_builder.process(n=25, verbose=True)
+pc_builder.process(n=25, )
 
 # extract output measurements
 measurements = pc_builder.get_measurements()
